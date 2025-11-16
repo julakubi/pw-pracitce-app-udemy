@@ -46,6 +46,7 @@ test("parametrized methods @smoke", async ({ page }) => {
   await pm.onDatepickerPage().selectDatepickerWithRangeFromToday(6, 10);
 });
 
+//Tutaj test ci
 test.only("testing with argos ci", async ({ page }) => {
   const pm = new PageManager(page);
   await pm.navigateTo().formLayoutsPage();
