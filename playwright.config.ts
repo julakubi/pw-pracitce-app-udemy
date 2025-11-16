@@ -17,6 +17,15 @@ export default defineConfig<TestOptions>({
     ["junit", { outputFile: "test-results/junitReport.xml" }],
     // ['allure-playwright'],
     ["html"],
+    process.env.CI ? ["dot"] : ["list"],
+    // Add Argos reporter.
+    [
+      "@argos-ci/playwright/reporter",
+      {
+        // Upload to Argos on CI only.
+        uploadToArgos: !!process.env.CI,
+      },
+    ],
   ],
 
   use: {
@@ -29,6 +38,7 @@ export default defineConfig<TestOptions>({
         : "http://localhost:4200/",
 
     trace: "on-first-retry",
+    screenshot: "only-on-failure",
     actionTimeout: 20000,
     navigationTimeout: 25000,
     video: {
